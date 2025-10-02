@@ -22,7 +22,7 @@ H = J_2*J
 
 m = int(L/2)
 
-ising = np.ones((L,L)) #Initialised stable 
+ising = np.ones((L,L)) #Initialised unstable 
 #For random initialisation: np.random.choice([1,-1], size = (L,L))
 
 @njit
@@ -36,7 +36,7 @@ def self_eng_per(spin, i, j, J_1, J_2, L): #Periodic boundaries
     return dE
 
 @njit
-def metro(ising, L, t_step, J_1, J_2, mode = 'g'): #Monte carlo update, L*L sweeps
+def metro(ising, L, t_step, J_1, J_2, mode = 'g'): #Monte carlo update, L*L sweeps 
     for _ in range(t_step):
         i = np.random.randint(0,L)
         j = np.random.randint(0,L)
@@ -85,7 +85,7 @@ avg_ising = np.zeros((n_snaps,L,L))
 avg_R = np.zeros(n_snaps)
 
 @njit 
-def sweep(copies,X,m,steps,t_step,J_1,J_2,snap,L): #Returns averag
+def sweep(copies,X,m,steps,t_step,J_1,J_2,snap,L): #Returns averaged lattice and radius for all snapshots
     R = np.zeros(n_snaps)
     memory = np.zeros((n_snaps,L,L))
     for k in range(0, copies):
